@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'home_page/ui_screen/news_home.dart';
-import 'home_page/ui_screen/news_home_binding.dart';
+import 'home_page/presentation/news_home.dart';
+import 'home_page/presentation/news_home_binding.dart';
 
 void main() {
   runApp(const MyApp());
