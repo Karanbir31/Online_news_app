@@ -20,7 +20,12 @@ class NewsHome extends GetView<NewsController> {
               floating: true,
               snap: true,
               actions: [
-                IconButton(icon: const Icon(Icons.search), onPressed: () {}),
+                IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    Get.toNamed("/news_details");
+                  },
+                ),
               ],
             ),
 
@@ -63,15 +68,21 @@ class NewsHome extends GetView<NewsController> {
             ),
 
             //  Trending News Section
-            _sectionHeader("Trending", onSeeAll: () {
-              controller.readTopHeadlines();
-            }),
+            _sectionHeader(
+              "Trending",
+              onSeeAll: () {
+                controller.readTopHeadlines();
+              },
+            ),
             SliverToBoxAdapter(child: _trendingNewsList()),
 
             //  Latest News Section
-            _sectionHeader("Latest", onSeeAll: () {
-              controller.readLatestNews();
-            }),
+            _sectionHeader(
+              "Latest",
+              onSeeAll: () {
+                controller.readLatestNews();
+              },
+            ),
             _latestNewsList(),
           ],
         ),
