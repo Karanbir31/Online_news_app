@@ -6,7 +6,7 @@ class APIService {
   static final instance = APIService._privateConstructor();
   static final _baseUrl = "https://newsapi.org/v2/";
 
-  static final _apiKey = "i will add api key here";
+  static final _apiKey = "";
 
 
   static final dio = Dio(

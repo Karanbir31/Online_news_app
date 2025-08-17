@@ -14,6 +14,10 @@ class NewsRepository {
     try {
       final response = await _dio.get(
         "everything",
+          queryParameters: {
+            "q" : "bitcoin",
+            "pageSize": 20
+          }
       );
       return NewsApiResponse.fromJson(response.data);
     } on DioException catch (e) {

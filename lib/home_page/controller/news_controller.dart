@@ -4,6 +4,12 @@ import 'package:news_app/core/news_repository.dart';
 import 'package:news_app/home_page/modules/news.dart';
 
 class NewsController extends GetxController {
+  @override
+  void onReady() {
+    readLatestNews();
+    readTopHeadlines();
+    super.onReady();
+  }
 
   final NewsRepository newsRepo = NewsRepository();
 
@@ -24,7 +30,7 @@ class NewsController extends GetxController {
   final Rxn<NewsApiResponse> topHeadlines = Rxn<NewsApiResponse>();
   final Rxn<NewsApiResponse> allNews = Rxn<NewsApiResponse>();
 
-  Future getAllNews() async {
+  Future readLatestNews() async {
     try {
       var newsApiResponse = await newsRepo.getEverything();
 
@@ -34,7 +40,7 @@ class NewsController extends GetxController {
     }
   }
 
-  Future getTopHeadlines() async {
+  Future readTopHeadlines() async {
     try {
       var newsApiResponse = await newsRepo.getTopHeadlines();
 
