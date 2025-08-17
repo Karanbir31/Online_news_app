@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -105,13 +104,13 @@ class NewsHome extends GetView<NewsController> {
                   itemCount: 5,
 
                   itemBuilder: (context, index) => Container(
-                    width: (Get.width * 0.8),
+                    width: (Get.width * 0.9),
                     margin: EdgeInsets.all(8),
 
                     clipBehavior: Clip.hardEdge,
 
                     decoration: BoxDecoration(
-                      color: Colors.blue[100],
+                      border: BoxBorder.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
@@ -127,14 +126,8 @@ class NewsHome extends GetView<NewsController> {
                             ),
                             alignment: Alignment.center,
                             fit: BoxFit.fill,
-                            width: (Get.width * 0.8),
+                            width: (Get.width * 0.9),
                           ),
-                        ),
-
-                        Text(
-                          "USA ",
-                          style: TextStyle(fontSize: 14),
-                          maxLines: 1,
                         ),
 
                         Text(
@@ -145,7 +138,11 @@ class NewsHome extends GetView<NewsController> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 4),
+                          padding: const EdgeInsets.only(
+                            top: 8.0,
+                            bottom: 8.0,
+                            left: 4,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -156,7 +153,9 @@ class NewsHome extends GetView<NewsController> {
                               ),
 
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                ),
                                 child: Text(
                                   "BCC News ",
                                   style: TextStyle(fontSize: 14),
@@ -166,12 +165,16 @@ class NewsHome extends GetView<NewsController> {
                               ),
 
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4.0,
+                                ),
                                 child: Icon(Icons.watch_later_outlined),
                               ),
 
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4.0,
+                                ),
                                 child: Text(
                                   "4 hrs ago. ",
                                   style: TextStyle(fontSize: 14),
@@ -204,5 +207,3 @@ class NewsHome extends GetView<NewsController> {
     );
   }
 }
-
-
