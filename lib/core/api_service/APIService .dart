@@ -10,6 +10,7 @@ class APIService {
 
 
   static final dio = Dio(
+
     BaseOptions(
       baseUrl: _baseUrl,
       headers: {
@@ -19,11 +20,6 @@ class APIService {
       }
     )
   );
-
-  // why we include  'Content-Type': 'application/json',
-
-
-
 
 
 }

@@ -4,6 +4,7 @@ import 'package:news_app/core/news_repository.dart';
 import 'package:news_app/home_page/modules/news.dart';
 
 class NewsController extends GetxController {
+
   @override
   void onReady() {
     readLatestNews();

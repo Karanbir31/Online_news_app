@@ -8,6 +8,14 @@ class NewsDetails extends GetView<NewsDetailsController> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = Get.arguments;
+    final String targetUrl = arguments['data'];
+
+    if(targetUrl.isNotEmpty ){
+      controller.updateTargetUrl(url: targetUrl);
+    }
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("News Details"),
@@ -18,9 +26,14 @@ class NewsDetails extends GetView<NewsDetailsController> {
       ),
 
       body: SafeArea(
-        child: WebViewWidget(
-          controller: controller.webViewController,
-          layoutDirection: TextDirection.ltr,
+        child: GetBuilder<NewsDetailsController>(
+          builder: (controller) {
+            return WebViewWidget(
+              controller: controller.webViewController,
+              layoutDirection: TextDirection.ltr,
+            );
+          },
+
         ),
       ),
     );

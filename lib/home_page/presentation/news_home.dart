@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/navigations/nav_routes.dart';
 import '../controller/news_controller.dart';
 
 class NewsHome extends GetView<NewsController> {
@@ -23,7 +24,7 @@ class NewsHome extends GetView<NewsController> {
                 IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () {
-                    Get.toNamed("/news_details");
+
                   },
                 ),
               ],
@@ -74,6 +75,7 @@ class NewsHome extends GetView<NewsController> {
                 controller.readTopHeadlines();
               },
             ),
+
             SliverToBoxAdapter(child: _trendingNewsList()),
 
             //  Latest News Section
@@ -131,62 +133,77 @@ class NewsHome extends GetView<NewsController> {
         () => ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: controller.topHeadlines.value?.articles.length ?? 0,
-          itemBuilder: (context, index) => Container(
-            width: Get.width * 0.9,
-            margin: const EdgeInsets.all(8),
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Image.network(
-                    controller.topHeadlines.value?.articles[index].urlToImage ??
-                        "https://images.pexels.com/photos/378570/pexels-photo-378570.jpeg",
-                    fit: BoxFit.fill,
-                    width: Get.width * 0.9,
+          itemBuilder: (context, index) => GestureDetector(
+            onTap: () {
+              Get.toNamed(
+                NavRoutes.newsDetailsRoute,
+                arguments: {
+                  'data':
+                  controller.topHeadlines.value?.articles[index].url,
+                },
+              );
+            },
+            child: Container(
+              width: Get.width * 0.9,
+              margin: const EdgeInsets.all(8),
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Image.network(
+                      controller
+                              .topHeadlines
+                              .value
+                              ?.articles[index]
+                              .urlToImage ??
+                          "https://images.pexels.com/photos/378570/pexels-photo-378570.jpeg",
+                      fit: BoxFit.fill,
+                      width: Get.width * 0.9,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4.0, left: 4),
-                  child: Text(
-                    controller.topHeadlines.value?.articles[index].title ??
-                        "Some important news headline you can replace this with some test news",
-                    style: const TextStyle(fontSize: 16),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4.0, left: 4),
+                    child: Text(
+                      controller.topHeadlines.value?.articles[index].title ??
+                          "Some important news headline you can replace this with some test news",
+                      style: const TextStyle(fontSize: 16),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 4,
-                    vertical: 6,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 4,
+                      vertical: 6,
+                    ),
+                    child: Row(
+                      children: [
+                        CircleAvatar(radius: 12, backgroundColor: Colors.red),
+                        SizedBox(width: 8),
+                        Text(
+                          controller
+                                  .topHeadlines
+                                  .value
+                                  ?.articles[index]
+                                  .source
+                                  .name ??
+                              "BCC News",
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        SizedBox(width: 4),
+                        Icon(Icons.watch_later_outlined, size: 16),
+                        SizedBox(width: 4),
+                        Text("4 hrs ago", style: TextStyle(fontSize: 14)),
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    children: [
-                      CircleAvatar(radius: 12, backgroundColor: Colors.red),
-                      SizedBox(width: 8),
-                      Text(
-                        controller
-                                .topHeadlines
-                                .value
-                                ?.articles[index]
-                                .source
-                                .name ??
-                            "BCC News",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(width: 4),
-                      Icon(Icons.watch_later_outlined, size: 16),
-                      SizedBox(width: 4),
-                      Text("4 hrs ago", style: TextStyle(fontSize: 14)),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -199,62 +216,74 @@ class NewsHome extends GetView<NewsController> {
     return SliverList(
       delegate: SliverChildBuilderDelegate((context, index) {
         return Obx(
-          () => Container(
-            margin: const EdgeInsets.all(8),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    controller.allNews.value?.articles[index].urlToImage ??
-                        "https://images.pexels.com/photos/378570/pexels-photo-378570.jpeg",
-                    fit: BoxFit.fill,
-                    height: 84,
-                    width: 84,
+          () => GestureDetector(
+            onTap: () {
+              Get.toNamed(
+                NavRoutes.newsDetailsRoute,
+                arguments: {
+                  'data':
+                  controller.allNews.value?.articles[index].url,
+                },
+              );
+            },
+
+            child: Container(
+              margin: const EdgeInsets.all(8),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      controller.allNews.value?.articles[index].urlToImage ??
+                          "https://images.pexels.com/photos/378570/pexels-photo-378570.jpeg",
+                      fit: BoxFit.fill,
+                      height: 84,
+                      width: 84,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        controller.allNews.value?.articles[index].title ??
-                            "Some important news headline you can replace this with some test news",
-                        style: TextStyle(fontSize: 16),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 12,
-                              backgroundColor: Colors.red,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              controller
-                                      .allNews
-                                      .value
-                                      ?.articles[index]
-                                      .source
-                                      .name ??
-                                  "BCC News",
-                              style: TextStyle(fontSize: 14),
-                            ),
-                            SizedBox(width: 8),
-                            Icon(Icons.watch_later_outlined, size: 16),
-                            SizedBox(width: 4),
-                            Text("4 hrs ago", style: TextStyle(fontSize: 14)),
-                          ],
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          controller.allNews.value?.articles[index].title ??
+                              "Some important news headline you can replace this with some test news",
+                          style: TextStyle(fontSize: 16),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 12,
+                                backgroundColor: Colors.red,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                controller
+                                        .allNews
+                                        .value
+                                        ?.articles[index]
+                                        .source
+                                        .name ??
+                                    "BCC News",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              SizedBox(width: 8),
+                              Icon(Icons.watch_later_outlined, size: 16),
+                              SizedBox(width: 4),
+                              Text("4 hrs ago", style: TextStyle(fontSize: 14)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
